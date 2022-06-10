@@ -1,6 +1,8 @@
 from rest_framework import generics
 from .serializers import DrinkSerializer
 from drinks.models import Drink
+from .permissions import IsOwnerOrReadOnly
+
 
 
 class DrinksListAPIView(generics.ListCreateAPIView):
@@ -11,3 +13,5 @@ class DrinksListAPIView(generics.ListCreateAPIView):
 class DrinksDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Drink.objects.all()
     serializer_class = DrinkSerializer
+    permission_classes = (IsOwnerOrReadOnly)
+
